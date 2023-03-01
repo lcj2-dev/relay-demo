@@ -1,7 +1,7 @@
 const { parse } = require('url');
 const server = require('./server');
 
-const { numbersSocket, broadcastSocket } = require('./sockets');
+const { numbersSocket, broadcastSocket, relaySocket } = require('./sockets');
 
 server.on('upgrade', (request, socket, head) => {
   const { pathname } = parse(request.url);
@@ -15,6 +15,11 @@ server.on('upgrade', (request, socket, head) => {
     case '/chat':
       broadcastSocket.handleUpgrade(request, socket, head, ws => {
         broadcastSocket.emit('connection', ws, request);
+      });
+      break;
+    case '/boards':
+      relaySocket.handleUpgrade(request, socket, head, ws => {
+        relaySocket.emit('connection', ws, request);
       });
       break;
     default:
