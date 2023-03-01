@@ -21,7 +21,7 @@ broadcastSocket.on('connection', ws => {
 
     broadcastSocket.clients.forEach(client => {
       if (client.readyState == WebSocket.OPEN && client != ws) {
-        client.send(data);
+        client.send(data.toString());
       }
     });
   });
