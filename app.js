@@ -2,4 +2,8 @@ const server = require('./server');
 require('./jobs');
 require('./router');
 
-server.listen(8080);
+const PORT = 8080;
+
+server.listen(PORT);
+
+console.log(`Server is working on port ${PORT}`);
